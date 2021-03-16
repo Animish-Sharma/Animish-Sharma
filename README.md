@@ -16,7 +16,7 @@
 [**Instagram**](https://instagram.com/i_am_animish_sharma)
 
 
-[**_Twitter_**](https://twitter.com/IAMANIMSH)
+[**_Twitter_**](https://twitter.com/IAMANIMISH)
 
 
 ## **_Thank You For Reading_**
