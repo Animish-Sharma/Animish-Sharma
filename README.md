@@ -5,7 +5,7 @@
 - You can Reach me by **animish407@gmail.com**
 
 > My Name is Animish Sharma.
-- Currently I am 15 Years old and have been coding since 13.
+- Currently I am 15 years old and started coding at the age of 13.
 ***
 - I am From India and Currently Learning Python and Flutter.
 
