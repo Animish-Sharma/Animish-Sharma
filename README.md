@@ -1,21 +1,19 @@
-# Brief Introduction
-- Hi, My Name is Animish Sharma.
-- I’m interested in Web Devlopment and Machine Learning
-- I’m currently learning NodeJs , Flutter and Golang
-- You can Reach me by **animish407@gmail.com**
 
-> My Name is Animish Sharma.
-- Currently I am 15 years old and started coding at the age of 13.
-***
+# Brief Introduction
+- My Name is Animish Sharma
+- I am interested in Web Devlopment and App Devlopment
 
 ## Follow Me On Social Media:-
 
 [**_FaceBook_**](https://facebook.com/animish.s.44)
 
-[**Instagram**](https://instagram.com/i_am_animish_sharma)
+[**Instagram**](https://instagram.com/iamanimish)
 
 
-[**_Twitter_**](https://twitter.com/IAMANIMISH)
+[**_Twitter_**](https://twitter.com/iamanimish)
+
+[**Additional links**](https://linktr.ee/xeclipse)
 
 
 ## **_Thank You For Reading_**
+### ~Anmish Sharma 
