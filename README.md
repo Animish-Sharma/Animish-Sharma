@@ -1,13 +1,12 @@
 
 # Brief Introduction
-- My Name is Animish Sharma
-- I am interested in Web Devlopment and App Devlopment
+- Interested in App Devlopment and Machine Learning
 
 ## Follow Me On Social Media:-
 
 [**_FaceBook_**](https://facebook.com/animish.s.44)
 
-[**Instagram**](https://instagram.com/iamanimish)
+[**Instagram**](https://instagram.com/animishxsharma)
 
 
 [**_Twitter_**](https://twitter.com/iamanimish)
