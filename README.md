@@ -9,7 +9,7 @@
 [**Instagram**](https://instagram.com/animishxsharma)
 
 
-[**_Twitter_**](https://twitter.com/iamanimish)
+[**_Twitter_**](https://twitter.com/animishxsharma)
 
 [**Additional links**](https://linktr.ee/xeclipse)
 
