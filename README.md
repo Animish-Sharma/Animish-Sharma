@@ -1,14 +1,14 @@
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=70&duration=3000&pause=1000&color=B9FBC0&center=true&vCenter=true&width=1600&height=200&lines=Hi%2C+I+am+Animish+Sharma!;Welcome+to+my+GitHub+Profile" alt="Typing SVG" /></a>
 <p style="font-size: 23px; text-align:center; font-weight: 700;">Undergrad at IIIT Hyderabad</p>
 <hr style="height:0.8px"/>
-<span style="display:flex; flex-direction: row; align-items:center"><iframe src="https://giphy.com/embed/dzaUX7CAG0Ihi" width="120" height= "60"style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p style="font-size: 23px; font-weight: 200; margin-left: 8px;">&nbsp;&nbsp;Connect with me</p></span>
+<span style="display:flex; flex-direction: row; align-items:center"><h2 style="font-size: 23px; font-weight: 200; margin-left: 8px;">&nbsp;&nbsp;Connect with me</h2></span>
 <hr style="height: 0.8px"/>
 
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/animish-s-b4531a276/) [![Outlook](https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white)](mailto:animish.sharma@students.iiit.ac.in) [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/animishxsharma) [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Animish-Sharma) [![Github](https://img.shields.io/badge/Linktree-100000?style=for-the-badge&logo=linktree)](https://linktr.ee/animishxsharma)
 
 <br style="height=0"/>
-<span style="display:flex; flex-direction: row; align-items:center"><iframe src="https://giphy.com/embed/l3q2QYwaBdjZGz1II" width="120" height= "60"style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><h2 style="font-size: 24px; font-weight: 200; margin-left: 8px;">&nbsp;&nbsp;About Me</h2></span>
+<span style="display:flex; flex-direction: row; align-items:center"><h2 style="font-size: 24px; font-weight: 200; margin-left: 8px;">&nbsp;&nbsp;About Me</h2></span>
 <hr style="height: 0.8px"/>
 
 <h3 style="font-size: 22px">Full-Stack Development Enthusiast</h3>
