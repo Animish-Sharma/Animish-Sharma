@@ -17,7 +17,7 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN') # GitHub personal access token with the
 if not ACCESS_TOKEN:
     raise RuntimeError('ACCESS_TOKEN environment variable is required')
 HEADERS = {'authorization': 'token ' + ACCESS_TOKEN}
-USER_NAME = os.getenv('USER_NAME', 'Animish-Sharma')
+USER_NAME = os.getenv('USER_NAME') or 'Animish-Sharma'
 REQUEST_TIMEOUT = 30
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
