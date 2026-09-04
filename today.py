@@ -53,8 +53,15 @@ def simple_request(func_name, query, variables):
     Returns a request, or raises an Exception if the response does not succeed.
     """
     request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS, timeout=REQUEST_TIMEOUT)
-    if request.status_code == 200 and 'errors' not in request.json():
-        return request
+    if request.status_code == 200:
+        response = request.json()
+        # GitHub GraphQL can return partial data with an "errors" field, for example
+        # when a few repositories are inaccessible. Use the partial data if the user
+        # was resolved, but still fail for invalid usernames/authentication problems.
+        if response.get('data', {}).get('user') is not None:
+            if 'errors' in response:
+                print(func_name, 'returned partial data:', response['errors'])
+            return request
     raise Exception(func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
 
 
@@ -323,7 +330,9 @@ def stars_counter(data):
     Count total stars in repositories owned by me
     """
     total_stars = 0
-    for node in data: total_stars += node['node']['stargazers']['totalCount']
+    for node in data:
+        if node.get('node') is not None:
+            total_stars += node['node']['stargazers']['totalCount']
     return total_stars
 
 
