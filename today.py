@@ -14,8 +14,11 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN') # GitHub personal access token with the
 # Account permissions: read:Followers, read:Starring, read:Watching
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
-HEADERS = {'authorization': 'token '+ ACCESS_TOKEN}
-USER_NAME = "Animish-Sharma" # 'Andrew6rant'
+if not ACCESS_TOKEN:
+    raise RuntimeError('ACCESS_TOKEN environment variable is required')
+HEADERS = {'authorization': 'token ' + ACCESS_TOKEN}
+USER_NAME = os.getenv('USER_NAME', 'Animish-Sharma')
+REQUEST_TIMEOUT = 30
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
 
@@ -27,8 +30,8 @@ def daily_readme(birthday):
     diff = relativedelta.relativedelta(datetime.datetime.today(), birthday)
     print('Age:', diff.years, 'year' + format_plural(diff.years), diff.months, 'month' + format_plural(diff.months), diff.days, 'day' + format_plural(diff.days))
     return '{} {}, {} {}, {} {}{}'.format(
-        diff.years, 'year' + format_plural(diff.years), 
-        diff.months, 'month' + format_plural(diff.months), 
+        diff.years, 'year' + format_plural(diff.years),
+        diff.months, 'month' + format_plural(diff.months),
         diff.days, 'day' + format_plural(diff.days),
         ' 🎂' if (diff.months == 0 and diff.days == 0) else '')
 
@@ -49,8 +52,8 @@ def simple_request(func_name, query, variables):
     """
     Returns a request, or raises an Exception if the response does not succeed.
     """
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
-    if request.status_code == 200:
+    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS, timeout=REQUEST_TIMEOUT)
+    if request.status_code == 200 and 'errors' not in request.json():
         return request
     raise Exception(func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
 
@@ -149,7 +152,7 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
         }
     }'''
     variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor}
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS) # I cannot use simple_request(), because I want to save the file before raising Exception
+    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS, timeout=REQUEST_TIMEOUT) # I cannot use simple_request(), because I want to save the file before raising Exception
     if request.status_code == 200:
         if request.json()['data']['repository']['defaultBranchRef'] != None: # Only count commits if repo isn't empty
             return loc_counter_one_repo(owner, repo_name, data, cache_comment, request.json()['data']['repository']['defaultBranchRef']['target']['history'], addition_total, deletion_total, my_commits)
@@ -162,11 +165,12 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
 
 def loc_counter_one_repo(owner, repo_name, data, cache_comment, history, addition_total, deletion_total, my_commits):
     """
-    Recursively call recursive_loc (since GraphQL can only search 100 commits at a time) 
+    Recursively call recursive_loc (since GraphQL can only search 100 commits at a time)
     only adds the LOC value of commits authored by me
     """
     for node in history['edges']:
-        if node['node']['author']['user'] == OWNER_ID:
+        author = node['node'].get('author') or {}
+        if author.get('user') == OWNER_ID:
             my_commits += 1
             addition_total += node['node']['additions']
             deletion_total += node['node']['deletions']
@@ -176,7 +180,7 @@ def loc_counter_one_repo(owner, repo_name, data, cache_comment, history, additio
     else: return recursive_loc(owner, repo_name, data, cache_comment, addition_total, deletion_total, my_commits, history['pageInfo']['endCursor'])
 
 
-def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None, edges=[]):
+def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None, edges=None):
     """
     Uses GitHub's GraphQL v4 API to query all the repositories I have access to (with respect to owner_affiliation)
     Queries 60 repos at a time, because larger queries give a 502 timeout error and smaller queries send too many
@@ -184,6 +188,8 @@ def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None,
     Returns the total number of lines of code in all repositories
     """
     query_count('loc_query')
+    if edges is None:
+        edges = []
     query = '''
     query ($owner_affiliation: [RepositoryAffiliation], $login: String!, $cursor: String) {
         user(login: $login) {
@@ -289,7 +295,7 @@ def add_archive():
     with open('cache/repository_archive.txt', 'r') as f:
         data = f.readlines()
     old_data = data
-    data = data[7:len(data)-3] # remove the comment block    
+    data = data[7:len(data)-3] # remove the comment block
     added_loc, deleted_loc, added_commits = 0, 0, 0
     contributed_repos = len(data)
     for line in data:
